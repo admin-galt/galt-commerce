@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { GridTileImage } from "components/grid/tile";
 import Footer from "components/layout/footer";
+import JsonLd from "components/json-ld";
 import { Gallery } from "components/product/gallery";
 import { ProductProvider } from "components/product/product-context";
 import { ProductDescription } from "components/product/product-description";
@@ -64,7 +65,7 @@ export default async function ProductPage(props: {
 		"@type": "Product",
 		name: product.title,
 		description: product.description,
-		image: product.featuredImage.url,
+		image: product.featuredImage?.url,
 		offers: {
 			"@type": "AggregateOffer",
 			availability: product.availableForSale
@@ -78,12 +79,7 @@ export default async function ProductPage(props: {
 
 	return (
 		<ProductProvider>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{
-					__html: JSON.stringify(productJsonLd),
-				}}
-			/>
+			<JsonLd data={productJsonLd} />
 			<div className="mx-auto max-w-screen-2xl px-4">
 				<div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
 					<div className="h-full w-full basis-full lg:basis-4/6">
