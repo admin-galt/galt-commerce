@@ -1,37 +1,42 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 
 export const config = {
-  matcher: '/:path*'
+	matcher: ["/:path*", "/((?!api/revalidate).*)"],
 };
 
 export default function middleware(req: NextRequest) {
-  const auth = req.headers.get('authorization');
+	// Skip middleware for /api/revalidate route
+	if (req.nextUrl.pathname.startsWith("/api/revalidate")) {
+		return NextResponse.next();
+	}
 
-  const username = process.env.BASIC_AUTH_USERNAME;
-  const password = process.env.BASIC_AUTH_PASSWORD;
+	const auth = req.headers.get("authorization");
 
-  try {
-    // If no auth header, respond with 401 and prompt for credentials
-    if (!auth) {
-      throw new Error('Authentication required');
-    }
+	const username = process.env.BASIC_AUTH_USERNAME;
+	const password = process.env.BASIC_AUTH_PASSWORD;
 
-    // Decode the base64 encoded credentials
-    const [user, pwd] = atob(auth.split(' ')[1] || '').split(':');
+	try {
+		// If no auth header, respond with 401 and prompt for credentials
+		if (!auth) {
+			throw new Error("Authentication required");
+		}
 
-    // Check if credentials match
-    if (user === username && pwd === password) {
-      return NextResponse.next();
-    }
+		// Decode the base64 encoded credentials
+		const [user, pwd] = atob(auth.split(" ")[1] || "").split(":");
 
-    throw new Error('Invalid credentials');
-  } catch (e) {
-    const err = e as Error;
-    return new Response(err.message, {
-      status: 401,
-      headers: {
-        'WWW-Authenticate': 'Basic realm="Secure Area"'
-      }
-    });
-  }
+		// Check if credentials match
+		if (user === username && pwd === password) {
+			return NextResponse.next();
+		}
+
+		throw new Error("Invalid credentials");
+	} catch (e) {
+		const err = e as Error;
+		return new Response(err.message, {
+			status: 401,
+			headers: {
+				"WWW-Authenticate": 'Basic realm="Secure Area"',
+			},
+		});
+	}
 }
