@@ -47,6 +47,14 @@ export type Image = {
   height: number;
 };
 
+export type Metafield = {
+  id: string;
+  namespace: string;
+  key: string;
+  value: string;
+  type: string;
+};
+
 export type Menu = {
   title: string;
   path: string;
@@ -130,6 +138,7 @@ export type ShopifyProduct = {
   variants: Connection<ProductVariant>;
   featuredImage: Image;
   images: Connection<Image>;
+  metafields: Metafield[];
   seo: SEO;
   tags: string[];
   updatedAt: string;

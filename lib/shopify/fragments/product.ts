@@ -41,6 +41,16 @@ const productFragment = /* GraphQL */ `
         }
       }
     }
+    metafields(identifiers: [
+      {namespace: "specs", key: "watch_hands_color"}, 
+      {namespace: "specs", key: "watch_movement"},
+    ]) {
+      id
+      namespace
+      key
+      value
+      type
+    }
     featuredImage {
       ...image
     }
