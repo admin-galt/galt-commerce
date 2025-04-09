@@ -1,9 +1,9 @@
 'use client';
 
+import { updateItemQuantity } from '@/components/cart/actions';
+import type { CartItem } from '@/lib/shopify/types';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { updateItemQuantity } from 'components/cart/actions';
-import type { CartItem } from 'lib/shopify/types';
 import { useActionState } from 'react';
 
 function SubmitButton({ type }: { type: 'plus' | 'minus' }) {

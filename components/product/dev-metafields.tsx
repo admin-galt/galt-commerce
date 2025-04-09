@@ -1,6 +1,6 @@
 "use client";
 
-import type { Product } from "lib/shopify/types";
+import type { Product } from "@/lib/shopify/types";
 import { useState } from "react";
 
 export function DevMetafields({ product }: { product: Product }) {

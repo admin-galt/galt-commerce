@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+Use PMPM as a package manager.
+
+do not run `pnpm dev` as I am running it in a separate terminal.

@@ -1,7 +1,7 @@
-import { AddToCart } from 'components/cart/add-to-cart';
-import Price from 'components/price';
-import Prose from 'components/prose';
-import type { Product } from 'lib/shopify/types';
+import { AddToCart } from '@/components/cart/add-to-cart';
+import Price from '@/components/price';
+import Prose from '@/components/prose';
+import type { Product } from '@/lib/shopify/types';
 import { DevMetafields } from './dev-metafields';
 import { VariantSelector } from './variant-selector';
 
