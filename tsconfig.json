@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@payload-config": ["./lib/payload/payload.config.ts"]
     },
     "types": ["payload"]
   },
